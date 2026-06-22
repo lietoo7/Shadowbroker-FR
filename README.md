@@ -290,6 +290,95 @@ Shadowbroker/
 │   │       └── ErrorBoundary.tsx   # Crash recovery wrapper
 │   └── package.json
 ```
+---
+
+### 💻 Developer Setup
+
+If you want to modify the code or run from source:
+
+#### Prerequisites
+
+* **Node.js** 18+ and **npm** — [nodejs.org](https://nodejs.org/)
+* **Python** 3.10, 3.11, or 3.12 with `pip` — [python.org](https://www.python.org/downloads/) (**check "Add to PATH"** during install)
+  * ⚠️ Python 3.13+ may have compatibility issues with some dependencies. **3.11 or 3.12 is recommended.**
+* API keys for: `aisstream.io` (required), and optionally `opensky-network.org` (OAuth2), `lta.gov.sg`
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/BigBodyCobain/Shadowbroker.git
+cd Shadowbroker
+
+# Backend setup
+cd backend
+python -m venv venv
+venv\Scripts\activate        # Windows
+# source venv/bin/activate   # macOS/Linux
+pip install .
+
+# Optional helper scripts (creates venv + installs dev deps)
+# Windows PowerShell
+# .\backend\scripts\setup-venv.ps1
+# macOS/Linux
+# ./backend/scripts/setup-venv.sh
+
+# Optional env check (prints warnings for missing keys)
+# Windows PowerShell
+# .\backend\scripts\check-env.ps1
+# macOS/Linux
+# ./backend/scripts/check-env.sh
+
+# Create .env with your API keys
+echo "AIS_API_KEY=your_aisstream_key" >> .env
+echo "OPENSKY_CLIENT_ID=your_opensky_client_id" >> .env
+echo "OPENSKY_CLIENT_SECRET=your_opensky_secret" >> .env
+
+# Frontend setup
+cd ../frontend
+npm ci
+```
+
+### Running
+
+```bash
+# From the frontend directory — starts both frontend & backend concurrently
+npm run dev
+```
+
+This starts:
+
+* **Next.js** frontend on `http://localhost:3000`
+* **FastAPI** backend on `http://localhost:8000`
+
+### Pre-commit (Optional)
+
+If you use pre-commit, install hooks once from repo root:
+
+```bash
+pre-commit install
+```
+
+### Local AIS Receiver (Optional)
+
+You can feed your own AIS ship data into ShadowBroker using an RTL-SDR dongle and [AIS-catcher](https://github.com/jvde-github/AIS-catcher), an open-source AIS decoder. This gives you real-time coverage of vessels in your local area — no API key needed.
+
+1. Plug in an RTL-SDR dongle
+2. Install AIS-catcher ([releases](https://github.com/jvde-github/AIS-catcher/releases)) or use the Docker image:
+   ```bash
+   docker run -d --device /dev/bus/usb \
+     ghcr.io/jvde-github/ais-catcher -H http://host.docker.internal:4000/api/ais/feed interval 10
+   ```
+3. Or run natively:
+   ```bash
+   AIS-catcher -H http://localhost:4000/api/ais/feed interval 10
+   ```
+
+AIS-catcher decodes VHF radio signals on 161.975 MHz and 162.025 MHz and POSTs decoded vessel data to ShadowBroker every 10 seconds. Ships detected by your SDR antenna appear alongside the global AIS stream.
+
+**Docker (ARM/Raspberry Pi):** See [docker-shipfeeder](https://github.com/sdr-enthusiasts/docker-shipfeeder) for a production-ready Docker image optimized for ARM.
+
+**Note:** AIS range depends on your antenna — typically 20-40 nautical miles with a basic setup, 60+ nm with a marine VHF antenna at elevation.
 
 ---
 
