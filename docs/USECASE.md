@@ -1,30 +1,22 @@
 1. Contexte organisationnel
-Quel ministère / institution ? (Défense, Intérieur, Affaires Étrangères, Sécurité Civile, autre ?)
-Qui est votre "sponsor" / commanditaire ? (Direction, département, service)
-Y a-t-il plusieurs ministères impliqués ? (Défense + Intérieur par exemple)
+- Shadowbroker s'addresse aux amateur de renseignement sur les menaces actives / intelligence sur sources ouverte. Il s'inscrit dans les projets opensource et communautaire.
 ---
 2. Utilisateurs finaux
-Combien d'utilisateurs simultanés ? (5 ? 50 ? 500 ?)
-Niveaux d'accès ? (Lecture seule / analyses / injection données ?)
-Qui décide des alertes à déclencher ? (Algorithme ou validation humaine ?)
-Existe-t-il un workflow de crise défini ? (escalade, notification, action)
-
----
-3. Objectifs opérationnels
-Scénario d'usage n°1 : Détection d'anomalie ; Exemple : "Un aéroport français a un pic anormal de mouvements militaires → alerter le préfet"
-Scénario d'usage n°2 : Renseignement géopolitique ; Exemple : "Affichage en temps réel de présences militaires étrangères en Méditerranée → aide à décision diplomatique"
-Scénario d'usage n°3 : Surveillance infrastructure critique ; Exemple : "Suivi de la sécurité des centrales nucléaires (statut, incidents) + incidents réseau = détecter cyberattaque"
-Scenario d'usage n°4 : Support opérationnel d'événement ; Exemple : "JO 2024 : suivi des mouvements transport, sécurité, contexte géopolitique sur 1 région"
+Combien d'utilisateurs simultanés ? La solution, une fois quelle est deployer dois etre penser pour fonctionner en mode dashboard sur ecran de télé dans un centre operationnel donc on peux avoir 1-5 utilisateur en meme temps.
  
 ---
+3. Objectifs opérationnels
+Scénario d'usage n°1 : Détection / suivit ; Exemple : "suivre les vols au depart / arrivée des aeroport francais","suivre les train sur les lignes francaises ferrovieres,"identifier les bouches de metros","affluence et traffic routier","suivit du traffic maritime".
+Scénario d'usage n°2 : Renseignement géopolitique ; Exemple : "Affichage en temps réel de présences militaires étrangères en Méditerranée / aux frontieres"
+Scénario d'usage n°3 : Surveillance infrastructure connecté ; Exemple : "Suivi de la sécurité des centrales nucléaires (statut, incidents) + incidents réseau = détecter cyberattaque","cctv en france sur source ouverte","attaques informatiques","campagnes de fishing","brouillage gps","SDR radio mesh","requettage shodan","centre de donnees","antennes / couverture du reseaux cellulaire","affichage des sattelites"
+  
+---
 4. Données & sources
-Qui fournit les données ? (partenaires gouv, API publiques, partenaires privés)
+Qui fournit les données ?  Se renseigner sur les API qui fournisses des donnees a exploiter dans le cadre du projet.
 Format des données ? (API temps-réel, fichiers batch, feeds RSS, bases DB)
-Classification de l'info ? (Diffusion Restreinte, Limité à l'Établissement, confidentiel défense)
-Latence acceptable ? (temps-réel -1s ? 5min ? 1h ?)
 Complétude requise ? (couverture 100% France ou zones prioritaires ?)
-CCTV publiques : gares, métro, centre-ville (RGPD ?) → quelle utilité réelle ?
-Réseaux sociaux : Telegram FR, Twitter/X OSINT → détection précoce ?
+CCTV publiques : gares, métro, centre-ville (RGPD ?)  
+Réseaux sociaux : Telegram FR, Twitter/X OSINT  
 Sources médias : agrégation AFP, Reuters, journalistes locaux
 Signalement citoyen : crowdsourcing (comme Waze sécurité) ?
 Données financières : mouvements suspects liés à financement terrorisme (TRACFIN) ?
